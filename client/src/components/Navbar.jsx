@@ -59,7 +59,7 @@ export default function Navbar() {
           <div className="w-5 h-0.5 bg-white rounded"></div>
         </div>
         <Link to="/home" className="font-bold text-xl transition-opacity duration-300 ease-in-out">
-          Skill<span className="text-blue-500">Mint</span>
+          Earn<span className="text-blue-500">Karo</span>
         </Link>
       </div>
 
