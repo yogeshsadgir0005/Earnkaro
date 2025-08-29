@@ -32,42 +32,42 @@ export default function VerifyPhone() {
   };
 
   return (
-    <div className="p-6 bg-black text-white min-h-screen flex items-center justify-center">
-      <div className="max-w-sm w-full bg-gray-800 p-6 rounded-xl shadow-lg">
+    <div className="p-6 bg-black text-white min-h-screen flex items-center justify-center transition-all duration-300 ease-in-out">
+      <div className="max-w-sm w-full bg-gray-800 p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out">
         {step === 1 ? (
-          <>
+          <div className="transition-opacity duration-300 ease-in-out opacity-100">
             <label className="block mb-2">Phone Number</label>
             <input
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Enter phone"
-              className="w-full p-3 rounded bg-gray-700 text-white mb-4"
+              className="w-full p-3 rounded bg-gray-700 text-white mb-4 transition-all duration-300 ease-in-out placeholder-gray-400"
             />
             <button
               onClick={sendOtp}
-              className="w-full bg-blue-600 py-2 rounded hover:bg-blue-700"
+              className="w-full bg-blue-600 py-2 rounded hover:bg-blue-700 transition-all duration-300 ease-in-out"
             >
               Send OTP
             </button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="transition-opacity duration-300 ease-in-out opacity-100">
             <label className="block mb-2">Enter OTP</label>
             <input
               type="text"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               placeholder="Enter OTP"
-              className="w-full p-3 rounded bg-gray-700 text-white mb-4"
+              className="w-full p-3 rounded bg-gray-700 text-white mb-4 transition-all duration-300 ease-in-out placeholder-gray-400"
             />
             <button
               onClick={verifyOtp}
-              className="w-full bg-green-600 py-2 rounded hover:bg-green-700"
+              className="w-full bg-green-600 py-2 rounded hover:bg-green-700 transition-all duration-300 ease-in-out"
             >
               Verify OTP
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>

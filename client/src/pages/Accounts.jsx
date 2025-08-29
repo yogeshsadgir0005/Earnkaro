@@ -45,7 +45,7 @@ export default function Accounts() {
   const renderSummary = () => {
     if (method === 'upi') {
       return (
-        <div className="text-white mt-4">
+        <div className="text-white mt-4 transition-opacity duration-300 ease-in-out">
           {user?.upiId ? (
             <p><strong>UPI ID:</strong> {user.upiId}</p>
           ) : (
@@ -55,7 +55,7 @@ export default function Accounts() {
       );
     } else {
       return (
-        <div className="text-white mt-4 space-y-1">
+        <div className="text-white mt-4 space-y-1 transition-opacity duration-300 ease-in-out">
           {user?.bank?.accountNumber ? (
             <>
               <p><strong>Account Number:</strong> {user.bank.accountNumber}</p>
@@ -73,52 +73,53 @@ export default function Accounts() {
   return (
     <>
       <Navbar />
-      <div className="bg-yellow-300 text-black text-center p-2 font-bold text-sm">
+      <div className="bg-yellow-300 text-black text-center p-2 font-bold text-sm transition-all duration-300 ease-in-out">
         Add or edit your payout method to receive earnings securely.
       </div>
 
-      <main className="bg-black min-h-screen text-white p-6">
-
+      <main className="bg-black min-h-screen text-white p-6 animate-fade-slide-in transition-all duration-500 ease-in-out">
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 flex items-center gap-2 text-sm text-blue-400 hover:text-white"
+          className="mb-6 flex items-center gap-2 text-sm text-blue-400 hover:text-white transition-all duration-300 ease-in-out"
         >
           <FaArrowLeft /> Back
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 transition-all duration-300 ease-in-out">
           <FaMoneyCheckAlt /> Add Payout Method
         </h2>
 
-   
-        <div className="flex gap-4 mb-6">
+        <div className="flex gap-4 mb-6 transition-all duration-300 ease-in-out">
           <button
-            className={`px-4 py-2 rounded ${method === 'upi' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-200'}`}
+            className={`px-4 py-2 rounded transition-all duration-300 ease-in-out ${
+              method === 'upi' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-200'
+            }`}
             onClick={() => { setMethod('upi'); setEditMode(false); setStatus(''); }}
           >
             UPI
           </button>
           <button
-            className={`px-4 py-2 rounded ${method === 'bank' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-200'}`}
+            className={`px-4 py-2 rounded transition-all duration-300 ease-in-out ${
+              method === 'bank' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-200'
+            }`}
             onClick={() => { setMethod('bank'); setEditMode(false); setStatus(''); }}
           >
             Bank Account
           </button>
         </div>
 
-       
         {editMode ? (
-          <div className="space-y-4 max-w-md">
+          <div className="space-y-4 max-w-md transition-all duration-300 ease-in-out">
             {method === 'upi' ? (
               <>
-                <label className="block">
+                <label className="block transition-opacity duration-300 ease-in-out">
                   UPI ID:
                   <input
                     type="text"
                     value={upiId}
                     onChange={(e) => setUpiId(e.target.value)}
                     placeholder="e.g., you@bank"
-                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white"
+                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white transition-all duration-300 ease-in-out"
                   />
                 </label>
               </>
@@ -130,7 +131,7 @@ export default function Accounts() {
                     type="text"
                     value={bank.holderName}
                     onChange={(e) => setBank({ ...bank, holderName: e.target.value })}
-                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white"
+                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white transition-all duration-300 ease-in-out"
                   />
                 </label>
                 <label className="block">
@@ -139,7 +140,7 @@ export default function Accounts() {
                     type="text"
                     value={bank.accountNumber}
                     onChange={(e) => setBank({ ...bank, accountNumber: e.target.value })}
-                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white"
+                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white transition-all duration-300 ease-in-out"
                   />
                 </label>
                 <label className="block">
@@ -148,41 +149,41 @@ export default function Accounts() {
                     type="text"
                     value={bank.ifsc}
                     onChange={(e) => setBank({ ...bank, ifsc: e.target.value })}
-                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white"
+                    className="mt-1 p-2 w-full rounded bg-gray-800 text-white transition-all duration-300 ease-in-out"
                   />
                 </label>
               </>
             )}
-            <div className="flex gap-4">
+            <div className="flex gap-4 transition-all duration-300 ease-in-out">
               <button
                 onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white"
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white transition-all duration-300 ease-in-out"
               >
                 Save
               </button>
               <button
                 onClick={() => setEditMode(false)}
-                className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded text-white"
+                className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded text-white transition-all duration-300 ease-in-out"
               >
                 Cancel
               </button>
             </div>
-            {status && <p className="text-yellow-400 font-medium">{status}</p>}
+            {status && <p className="text-yellow-400 font-medium transition-opacity duration-300 ease-in-out">{status}</p>}
           </div>
         ) : (
-          <div>
+          <div className="transition-all duration-300 ease-in-out">
             {renderSummary()}
             {(method === 'upi' && user?.upiId) || (method === 'bank' && user?.bank?.accountNumber) ? (
               <button
                 onClick={() => setEditMode(true)}
-                className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded flex items-center gap-2"
+                className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded flex items-center gap-2 transition-all duration-300 ease-in-out"
               >
                 <FaEdit /> Edit {method === 'upi' ? 'UPI ID' : 'Bank Details'}
               </button>
             ) : (
               <button
                 onClick={() => setEditMode(true)}
-                className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded flex items-center gap-2"
+                className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded flex items-center gap-2 transition-all duration-300 ease-in-out"
               >
                 ➕ Add {method === 'upi' ? 'UPI ID' : 'Bank Details'}
               </button>

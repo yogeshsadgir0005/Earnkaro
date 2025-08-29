@@ -36,13 +36,16 @@ const AdminLogin = ({ setIsAdmin }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <form onSubmit={handleAdminLogin} className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-xl font-bold mb-4 text-center">Admin Login</h2>
+    <div className="flex items-center justify-center h-screen bg-gray-100 transition-all duration-500 ease-in-out">
+      <form
+        onSubmit={handleAdminLogin}
+        className="bg-white p-6 rounded shadow-md w-96 transform transition-transform duration-500 ease-in-out animate-fade-slide-in"
+      >
+        <h2 className="text-xl font-bold mb-4 text-center transition-opacity duration-300">Admin Login</h2>
         <input
           type="email"
           placeholder="Admin Email"
-          className="w-full mb-4 px-4 py-2 border rounded"
+          className="w-full mb-4 px-4 py-2 border rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -50,7 +53,7 @@ const AdminLogin = ({ setIsAdmin }) => {
         <input
           type="password"
           placeholder="Password"
-          className="w-full mb-4 px-4 py-2 border rounded"
+          className="w-full mb-4 px-4 py-2 border rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -58,13 +61,13 @@ const AdminLogin = ({ setIsAdmin }) => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded flex justify-center"
+          className="w-full bg-blue-600 text-white py-2 rounded flex justify-center items-center transition-all duration-300 hover:bg-blue-700"
         >
           {loading ? <FaSpinner className="animate-spin" /> : 'Login'}
         </button>
-        <p className="text-sm text-center mt-4">
+        <p className="text-sm text-center mt-4 transition-opacity duration-300">
           Back to{' '}
-          <a href="/login" className="text-yellow-500 hover:underline">
+          <a href="/login" className="text-yellow-500 hover:underline transition-colors duration-300">
             User Login
           </a>
         </p>

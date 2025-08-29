@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('users');
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false); // 👈 NEW
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,51 +18,58 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <div className="p-8">
-      
+      <div className="p-8 transition-all duration-500 ease-in-out animate-fade-slide-in">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">👨‍💼 Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold transition-all duration-300 ease-in-out">👨‍💼 Admin Dashboard</h1>
           <button
             onClick={() => setShowLogoutConfirm(true)}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all duration-300 ease-in-out"
           >
             Logout
           </button>
         </div>
 
-       
-        <div className="flex space-x-4 mb-6">
+        <div className="flex space-x-4 mb-6 transition-all duration-300 ease-in-out">
           <button
             onClick={() => setActiveTab('users')}
-            className={`px-4 py-2 rounded-md ${activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded-md transition-all duration-300 ease-in-out ${
+              activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            }`}
           >
             Users
           </button>
           <button
             onClick={() => setActiveTab('taskApprovals')}
-            className={`px-4 py-2 rounded-md ${activeTab === 'taskApprovals' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded-md transition-all duration-300 ease-in-out ${
+              activeTab === 'taskApprovals' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            }`}
           >
             Task Approvals
           </button>
           <button
             onClick={() => setActiveTab('taskManagement')}
-            className={`px-4 py-2 rounded-md ${activeTab === 'taskManagement' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded-md transition-all duration-300 ease-in-out ${
+              activeTab === 'taskManagement' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            }`}
           >
             Task Management
           </button>
           <button
             onClick={() => setActiveTab('payouts')}
-            className={`px-4 py-2 rounded-md ${activeTab === 'payouts' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded-md transition-all duration-300 ease-in-out ${
+              activeTab === 'payouts' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            }`}
           >
             Payouts
           </button>
         </div>
 
-        
-        {activeTab === 'users' && <AdminUsersTab />}
-        {activeTab === 'taskApprovals' && <AdminTaskApprovals />}
-        {activeTab === 'taskManagement' && <AdminTasksTab />}
-        {activeTab === 'payouts' && <AdminPayoutsTab />}
+        <div className="transition-opacity duration-500 ease-in-out">
+          {activeTab === 'users' && <AdminUsersTab />}
+          {activeTab === 'taskApprovals' && <AdminTaskApprovals />}
+          {activeTab === 'taskManagement' && <AdminTasksTab />}
+          {activeTab === 'payouts' && <AdminPayoutsTab />}
+        </div>
       </div>
 
       {showLogoutConfirm && (

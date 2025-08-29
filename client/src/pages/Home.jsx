@@ -23,7 +23,6 @@ export default function Home() {
         console.error('Error fetching tasks:', e?.response?.data?.message || e.message);
       }
     };
-
     fetchData();
     fetchStreak();
   }, []);
@@ -39,9 +38,7 @@ export default function Home() {
 
   useEffect(() => {
     startAutoSlide();
- 
     return () => stopAutoSlide();
-
   }, [sliderTasks]);
 
   const startAutoSlide = () => {
@@ -70,59 +67,56 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="bg-yellow-300 text-black text-center p-2 font-semibold text-sm">
+      <div className="bg-yellow-300 text-black text-center p-2 font-semibold text-sm transition-all duration-300 ease-in-out">
         Join a platform where students & graduates build skills, land gigs, and earn real rewards
       </div>
 
-      <main className="bg-black text-white min-h-screen px-4 py-6 space-y-12">
-    <section className="relative w-full max-w-4xl mx-auto h-56 sm:h-60 md:h-72 overflow-hidden rounded-xl shadow-lg">
-  {sliderTasks.length > 0 ? (
-    <div className="relative w-full h-full">
-  {sliderTasks.map((task, i) => {
-  const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${task.banner}`;
-  return (
-    <div
-      key={i}
-      className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-        i === sliderIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-      }`}
-    >
-      <img
-        src={imageUrl}
-        alt="Task Banner"
-        className="w-full h-full object-cover rounded-xl"
-      />
-      <div className="absolute bottom-3 left-3 bg-black/70 p-3 rounded-lg max-w-[90%] sm:max-w-sm">
-        <h3 className="font-bold text-lg">{task.title}</h3>
-        <p className="text-xs text-gray-300">{task.description}</p>
-      </div>
-    </div>
-  );
-})}
+      <main className="bg-black text-white min-h-screen px-4 py-6 space-y-12 transition-all duration-300 ease-in-out">
+        <section className="relative w-full max-w-4xl mx-auto h-56 sm:h-60 md:h-72 overflow-hidden rounded-xl shadow-lg">
+          {sliderTasks.length > 0 ? (
+            <div className="relative w-full h-full">
+              {sliderTasks.map((task, i) => {
+                const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${task.banner}`;
+                return (
+                  <div
+                    key={i}
+                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                      i === sliderIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`}
+                  >
+                    <img
+                      src={imageUrl}
+                      alt="Task Banner"
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                    <div className="absolute bottom-3 left-3 bg-black/70 p-3 rounded-lg max-w-[90%] sm:max-w-sm transition-all duration-300 ease-in-out">
+                      <h3 className="font-bold text-lg">{task.title}</h3>
+                      <p className="text-xs text-gray-300">{task.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
 
-
-      <button
-        onClick={goPrev}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 p-2 rounded-full z-20"
-      >
-        <FaChevronLeft className="text-white text-sm sm:text-base" />
-      </button>
-      <button
-        onClick={goNext}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 p-2 rounded-full z-20"
-      >
-        <FaChevronRight className="text-white text-sm sm:text-base" />
-      </button>
-    </div>
-  ) : (
-    <p className="text-center text-gray-400">Loading slider...</p>
-  )}
-</section>
-
+              <button
+                onClick={goPrev}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 p-2 rounded-full z-20 transition hover:bg-black/80"
+              >
+                <FaChevronLeft className="text-white text-sm sm:text-base" />
+              </button>
+              <button
+                onClick={goNext}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 p-2 rounded-full z-20 transition hover:bg-black/80"
+              >
+                <FaChevronRight className="text-white text-sm sm:text-base" />
+              </button>
+            </div>
+          ) : (
+            <p className="text-center text-gray-400">Loading slider...</p>
+          )}
+        </section>
 
         <section>
           <h2 className="text-xl sm:text-2xl font-bold mb-4">⭐ Featured Tasks</h2>
-
           <div className="block sm:hidden overflow-x-auto pb-2">
             <div className="flex space-x-3">
               {featuredTasks.length === 0 ? (
@@ -131,10 +125,11 @@ export default function Home() {
                 featuredTasks.map((t) => (
                   <div
                     key={t._id}
-                    className="w-[130px] bg-gray-900 rounded-md p-2 flex-shrink-0 shadow-sm text-xs"
+                    className="w-[130px] bg-gray-900 rounded-md p-2 flex-shrink-0 shadow-sm text-xs transition-all duration-300 ease-in-out"
                   >
                     {t.banner && (
-                   <img src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`} 
+                      <img
+                        src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`}
                         alt="Task Banner"
                         className="w-full h-16 object-cover rounded mb-1"
                       />
@@ -149,7 +144,7 @@ export default function Home() {
                         href={t.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-1 rounded text-[10px]"
+                        className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-1 rounded text-[10px] transition"
                       >
                         Do
                       </a>
@@ -166,10 +161,11 @@ export default function Home() {
                 {featuredTasks.map((t) => (
                   <div
                     key={t._id}
-                    className="min-w-[270px] bg-gray-900 rounded-lg p-4 shadow-md hover:shadow-lg transition flex flex-col justify-between"
+                    className="min-w-[270px] bg-gray-900 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                   >
                     {t.banner && (
-                      <img src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`} 
+                      <img
+                        src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`}
                         alt="Task Banner"
                         className="w-full h-36 object-cover rounded mb-3"
                       />
@@ -184,7 +180,7 @@ export default function Home() {
                         href={t.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded text-sm"
+                        className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded text-sm transition"
                       >
                         Do Task
                       </a>
@@ -198,10 +194,11 @@ export default function Home() {
               {featuredTasks.map((t) => (
                 <div
                   key={t._id}
-                  className="bg-gray-900 rounded-lg p-4 shadow-md hover:shadow-lg transition flex flex-col justify-between"
+                  className="bg-gray-900 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
                   {t.banner && (
-                  <img src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`} 
+                    <img
+                      src={`${import.meta.env.VITE_BACKEND_URL}${t.banner}`}
                       alt="Task Banner"
                       className="w-full h-36 object-cover rounded mb-3"
                     />
@@ -216,7 +213,7 @@ export default function Home() {
                       href={t.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded text-sm"
+                      className="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded text-sm transition"
                     >
                       Do Task
                     </a>
@@ -228,7 +225,7 @@ export default function Home() {
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <section className="bg-gray-900 rounded-lg p-6">
+          <section className="bg-gray-900 rounded-lg p-6 transition-all duration-300">
             <h2 className="text-lg sm:text-xl font-bold mb-3">🆕 Latest Updates</h2>
             <ul className="text-gray-300 space-y-2 text-sm list-disc list-inside">
               <li>Referral bonus increased to ₹100</li>
@@ -237,14 +234,12 @@ export default function Home() {
             </ul>
           </section>
 
-          <section className="bg-gray-900 rounded-xl p-6 shadow-md text-white flex flex-col gap-4">
+          <section className="bg-gray-900 rounded-xl p-6 shadow-md text-white flex flex-col gap-4 transition-all duration-300">
             <div className="flex items-center justify-between">
               <h2 className="text-xl sm:text-2xl font-bold text-yellow-400 flex items-center gap-2">
                 🔥 Streak
               </h2>
-              <div className="text-sm text-gray-400">
-                {streak !== null ? `${streak} days` : '...'}
-              </div>
+              <div className="text-sm text-gray-400">{streak !== null ? `${streak} days` : '...'}</div>
             </div>
 
             <div className="flex items-center justify-between">

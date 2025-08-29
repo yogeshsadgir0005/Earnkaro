@@ -64,8 +64,8 @@ const VerifyOtp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-      <div className="bg-[#0a0a0a] border border-blue-500 rounded-xl w-full max-w-md p-6">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 transition-all duration-300 ease-in-out">
+      <div className="bg-[#0a0a0a] border border-blue-500 rounded-xl w-full max-w-md p-6 shadow-lg transition-transform duration-300 ease-in-out">
         <h2 className="text-xl font-semibold text-blue-400 text-center mb-6">Enter OTP</h2>
         <form onSubmit={handleVerify} className="flex flex-col gap-4">
           <input
@@ -75,14 +75,14 @@ const VerifyOtp = () => {
             required
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
-            className="bg-[#222] text-white px-4 py-3 rounded-md"
+            className="bg-[#222] text-white px-4 py-3 rounded-md transition-all duration-300 ease-in-out placeholder-gray-400"
           />
 
           <button
             type="submit"
             className={`${
               verifying ? 'bg-blue-400' : 'bg-blue-500 hover:bg-blue-600'
-            } text-white font-semibold py-3 rounded-md transition flex items-center justify-center`}
+            } text-white font-semibold py-3 rounded-md transition-all duration-300 ease-in-out flex items-center justify-center`}
           >
             {verifying ? (
               <span className="animate-spin border-t-2 border-white rounded-full h-5 w-5 border-r-2 border-l-transparent border-b-transparent"></span>
@@ -92,19 +92,19 @@ const VerifyOtp = () => {
           </button>
 
           {message && (
-            <p className="text-sm text-yellow-400 text-center mt-2 transition-opacity duration-300">
+            <p className="text-sm text-yellow-400 text-center mt-2 transition-opacity duration-300 ease-in-out">
               {message}
             </p>
           )}
 
-          <p className="text-sm text-center mt-2">
+          <p className="text-sm text-center mt-2 transition-all duration-300 ease-in-out">
             Didn’t receive OTP?{' '}
             {resendTimer > 0 ? (
               <span className="text-gray-400">Resend in {resendTimer}s</span>
             ) : (
               <span
                 onClick={handleResend}
-                className={`text-blue-400 cursor-pointer hover:underline transition duration-300 ${
+                className={`text-blue-400 cursor-pointer hover:underline transition duration-300 ease-in-out ${
                   resending ? 'opacity-50 pointer-events-none' : ''
                 }`}
               >

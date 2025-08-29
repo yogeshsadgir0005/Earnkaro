@@ -42,22 +42,21 @@ export default function Rewards() {
       <main className="bg-black min-h-screen text-white p-6 space-y-10">
         <button
           onClick={() => navigate(-1)}
-          className="text-white flex items-center gap-2 hover:text-yellow-400"
+          className="text-white flex items-center gap-2 hover:text-yellow-400 transition duration-300 ease-in-out"
         >
           <FaArrowLeft /> Back
         </button>
 
         <h2 className="text-3xl font-bold text-center">🎁 My Rewards</h2>
 
-        
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-gray-800 rounded-xl p-6 text-center shadow">
+          <div className="bg-gray-800 rounded-xl p-6 text-center shadow transition duration-300 ease-in-out hover:shadow-lg">
             <FaMedal className="text-yellow-400 text-3xl mx-auto mb-2" />
             <h3 className="text-xl font-bold">Total Earnings</h3>
             <p className="text-blue-400 font-semibold text-2xl">₹{totalEarned}</p>
           </div>
 
-          <div className="bg-gray-800 rounded-xl p-6 text-center shadow">
+          <div className="bg-gray-800 rounded-xl p-6 text-center shadow transition duration-300 ease-in-out hover:shadow-lg">
             <FaTrophy className="text-green-400 text-3xl mx-auto mb-2" />
             <h3 className="text-xl font-bold">Tasks Completed</h3>
             <p className="text-green-300 text-2xl">
@@ -69,18 +68,17 @@ export default function Rewards() {
             </p>
           </div>
 
-          <div className="bg-gray-800 rounded-xl p-6 text-center shadow">
+          <div className="bg-gray-800 rounded-xl p-6 text-center shadow transition duration-300 ease-in-out hover:shadow-lg">
             <FaGift className="text-pink-400 text-3xl mx-auto mb-2" />
             <h3 className="text-xl font-bold">Your Rank</h3>
             <p className="text-pink-300 text-2xl">Coming Soon 🔒</p>
           </div>
         </div>
 
-      
-        <section className="bg-gray-900 rounded-xl p-6">
+        <section className="bg-gray-900 rounded-xl p-6 transition duration-300 ease-in-out">
           <h3 className="text-xl font-bold mb-4">🧾 Reward History</h3>
           {loading ? (
-            <p className="text-gray-400">Loading...</p>
+            <p className="text-gray-400 animate-pulse">Loading...</p>
           ) : rewards.length === 0 ? (
             <p className="text-gray-400">No rewards yet. Start earning!</p>
           ) : (
@@ -97,7 +95,7 @@ export default function Rewards() {
                 </thead>
                 <tbody>
                   {rewards.slice().reverse().map((r, i) => (
-                    <tr key={i} className="border-b border-gray-800">
+                    <tr key={i} className="border-b border-gray-800 hover:bg-gray-800 transition duration-300 ease-in-out">
                       <td className="p-2">{r.title}</td>
                       <td className="p-2 text-green-400 font-semibold">₹{r.amount}</td>
                       <td className="p-2 capitalize">{r.status}</td>

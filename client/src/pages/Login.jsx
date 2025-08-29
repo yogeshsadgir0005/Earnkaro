@@ -36,19 +36,22 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="bg-yellow-400 text-black text-sm text-center py-2 font-semibold">
+    <div className="min-h-screen bg-black text-white flex flex-col transition-all duration-300 ease-in-out">
+      <div className="bg-yellow-400 text-black text-sm text-center py-2 font-semibold transition-all duration-300">
         Join a platform where students and graduates find real tasks, land internships, and earn while building valuable skills
       </div>
 
       <div className="p-4">
-        <button onClick={() => navigate(-1)} className="text-white flex items-center gap-2 hover:text-yellow-400 transition">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-white flex items-center gap-2 hover:text-yellow-400 transition duration-200"
+        >
           <FaArrowLeft /> Back
         </button>
       </div>
 
       {statusMsg.message && (
-        <div className={`mx-auto mb-4 text-center px-4 py-3 rounded-md max-w-md w-full ${
+        <div className={`mx-auto mb-4 text-center px-4 py-3 rounded-md max-w-md w-full transition-all duration-300 ${
           statusMsg.type === 'success'
             ? 'bg-green-100 text-green-700 border border-green-300'
             : 'bg-red-100 text-red-700 border border-red-300'
@@ -58,17 +61,19 @@ const Login = () => {
       )}
 
       <div className="flex flex-col items-center justify-center flex-1 px-4">
-        <div className="bg-[#0a0a0a] border border-blue-500 rounded-xl w-full max-w-md p-6 shadow-lg">
-          <h2 className="text-2xl font-semibold text-blue-400 text-center mb-6">Login to Your Account</h2>
+        <div className="bg-[#0a0a0a] border border-blue-500 rounded-xl w-full max-w-md p-6 shadow-lg transition-all duration-500">
+          <h2 className="text-2xl font-semibold text-blue-400 text-center mb-6 animate-fadeIn">
+            Login to Your Account
+          </h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 animate-fadeIn">
             <input
               type="email"
               name="email"
               placeholder="Email"
               required
               onChange={handleChange}
-              className="bg-[#222] text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+              className="bg-[#222] text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition duration-300"
             />
             <input
               type="password"
@@ -76,22 +81,34 @@ const Login = () => {
               placeholder="Password"
               required
               onChange={handleChange}
-              className="bg-[#222] text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+              className="bg-[#222] text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition duration-300"
             />
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition flex justify-center items-center"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition-all duration-300 flex justify-center items-center"
             >
               {isLoading ? <FaSpinner className="animate-spin" /> : 'Log In'}
             </button>
           </form>
 
-          <p className="text-sm text-center mt-4">
-            Don&apos;t have an account? <a href="/signup" className="text-blue-400 hover:underline">Sign up</a>
+          <p className="text-sm text-center mt-4 transition-all duration-300">
+            Don&apos;t have an account?{' '}
+            <a href="/signup" className="text-blue-400 hover:underline transition duration-200">
+              Sign up
+            </a>
           </p>
-          <p className="text-sm text-center mt-2">
-            Are you an admin? <a href="/admin-login" className="text-red-400 hover:underline">Login here</a>
+          <p className="text-sm text-center mt-2 transition-all duration-300">
+  <a href="/forgot-password" className="text-yellow-400 hover:underline">
+    Forgot Password?
+  </a>
+</p>
+
+          <p className="text-sm text-center mt-2 transition-all duration-300">
+            Are you an admin?{' '}
+            <a href="/admin-login" className="text-red-400 hover:underline transition duration-200">
+              Login here
+            </a>
           </p>
         </div>
       </div>

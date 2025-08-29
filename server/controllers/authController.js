@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const User = require('../models/User');
+const Otp = require('../models/Otp');
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -45,7 +46,6 @@ const signup = async (req, res) => {
       });
       await referrer.save();
 
-      
       newUser.points += 50;
       newUser.rewards.push({
         title: 'Signup Bonus via Referral',
@@ -69,12 +69,9 @@ const signup = async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: 'Signup failed', error: err.message });
   }
 };
-
-
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -117,6 +114,27 @@ const login = async (req, res) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) return res.status(400).json({ message: 'User not found' });
+
+    const validOtp = await Otp.findOne({ email: email.toLowerCase(), otp });
+    if (!validOtp) return res.status(400).json({ message: 'Invalid or expired OTP' });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    await Otp.deleteMany({ email: email.toLowerCase() });
+
+    res.status(200).json({ message: 'Password reset successful. Please log in.' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error resetting password', error: err.message });
+  }
+};
 
 function isNewDay(today, lastLogin) {
   return (
@@ -133,6 +151,4 @@ function dateDiffInDays(a, b) {
   return Math.floor((utc1 - utc2) / _MS_PER_DAY);
 }
 
-
-
-module.exports = { signup, login };
+module.exports = { signup, login, resetPassword };

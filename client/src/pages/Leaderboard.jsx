@@ -16,12 +16,8 @@ export default function Leaderboard() {
       setLoading(true);
       const token = localStorage.getItem('token');
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
       const res = await axios.get(`/user/leaderboard?range=${selectedRange}`, { headers });
-
-   
       const filteredTop = (res.data.top || []).filter((user) => !user.isAdmin);
-
       setTopUsers(filteredTop);
       setCurrentUser(res.data.currentUser || null);
     } catch (err) {
@@ -38,29 +34,26 @@ export default function Leaderboard() {
   return (
     <>
       <Navbar />
-      <div className="bg-yellow-300 text-black text-center p-2 font-bold text-sm">
+      <div className="bg-yellow-300 text-black text-center p-2 font-bold text-sm transition-all duration-300 ease-in-out">
         Join a platform where students and graduates find real tasks, land internships, and earn while building valuable skills
       </div>
 
-      <main className="bg-black text-white min-h-screen p-6 space-y-10">
-       
+      <main className="bg-black text-white min-h-screen p-6 space-y-10 transition-all duration-300 ease-in-out">
         <button
           onClick={() => navigate(-1)}
-          className="text-white flex items-center gap-2 hover:text-yellow-300 mb-2"
+          className="text-white flex items-center gap-2 hover:text-yellow-300 mb-2 transition duration-200"
         >
           <FaArrowLeft /> Back
         </button>
 
-      
-        <h2 className="text-3xl font-bold text-center mb-6">🏆 Leaderboard</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 transition-all duration-300">🏆 Leaderboard</h2>
 
-       
         <div className="flex justify-center mb-6 gap-3 flex-wrap">
           {['monthly', 'weekly', 'overall'].map((r) => (
             <button
               key={r}
               onClick={() => setRange(r)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                 range === r ? 'bg-yellow-300 text-black' : 'bg-gray-700 text-white'
               }`}
             >
@@ -69,8 +62,7 @@ export default function Leaderboard() {
           ))}
         </div>
 
-       
-        <div className="bg-gray-900 rounded-xl p-4 space-y-4">
+        <div className="bg-gray-900 rounded-xl p-4 space-y-4 transition-all duration-300">
           {loading ? (
             <p className="text-center text-gray-400 animate-pulse">Loading leaderboard...</p>
           ) : topUsers.length === 0 ? (
@@ -79,7 +71,7 @@ export default function Leaderboard() {
             topUsers.map((user, i) => (
               <div
                 key={i}
-                className="flex justify-between items-center bg-gray-800 p-3 rounded-lg"
+                className="flex justify-between items-center bg-gray-800 p-3 rounded-lg hover:bg-gray-700 transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
                   <div className="text-xl w-8 text-center">
@@ -103,27 +95,22 @@ export default function Leaderboard() {
           )}
         </div>
 
-    
-        {!loading &&
-          currentUser &&
-          !currentUser.isAdmin &&
-          currentUser.rank > 7 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold text-center text-gray-400 mb-2">Your Rank</h3>
-              <div className="flex justify-between items-center bg-gray-800 p-4 rounded-lg border border-yellow-400">
-                <div className="flex items-center gap-4">
-                  <div className="text-lg w-8 text-center">#{currentUser.rank}</div>
-                  <div>
-                    <p className="font-bold text-yellow-300">You</p>
-                    <p className="text-gray-400 text-sm">Student</p>
-                  </div>
+        {!loading && currentUser && !currentUser.isAdmin && currentUser.rank > 7 && (
+          <div className="mt-8 transition-all duration-300">
+            <h3 className="text-lg font-semibold text-center text-gray-400 mb-2">Your Rank</h3>
+            <div className="flex justify-between items-center bg-gray-800 p-4 rounded-lg border border-yellow-400 hover:border-yellow-300 transition-all duration-300">
+              <div className="flex items-center gap-4">
+                <div className="text-lg w-8 text-center">#{currentUser.rank}</div>
+                <div>
+                  <p className="font-bold text-yellow-300">You</p>
+                  <p className="text-gray-400 text-sm">Student</p>
                 </div>
-                <div className="font-bold text-yellow-300">{currentUser.points} pts</div>
               </div>
+              <div className="font-bold text-yellow-300">{currentUser.points} pts</div>
             </div>
-          )}
+          </div>
+        )}
       </main>
     </>
   );
 }
-

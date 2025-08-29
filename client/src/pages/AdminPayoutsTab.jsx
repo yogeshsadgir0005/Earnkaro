@@ -89,21 +89,21 @@ const AdminPayoutsTab = () => {
   }, [statusFilter, search, payouts]);
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
+    <div className="p-4 bg-white shadow rounded-lg animate-fade-slide-in transition-all duration-500 ease-in-out">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Payout Requests</h2>
 
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <input
           type="text"
           placeholder="Search by name/email"
-          className="px-3 py-2 border rounded w-60"
+          className="px-3 py-2 border rounded w-60 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 border rounded"
+          className="px-3 py-2 border rounded transition duration-300"
         >
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
@@ -112,13 +112,13 @@ const AdminPayoutsTab = () => {
         </select>
         <button
           onClick={() => setConfirm({ show: true, action: 'export', payload: true })}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
         >
           Export to Excel
         </button>
       </div>
 
-      <div className="overflow-auto max-h-[600px] border rounded">
+      <div className="overflow-auto max-h-[600px] border rounded transition-all duration-500">
         <table className="min-w-full border border-gray-300 text-sm">
           <thead>
             <tr className="bg-gray-100 text-center text-gray-700">
@@ -132,7 +132,7 @@ const AdminPayoutsTab = () => {
           </thead>
           <tbody>
             {filtered.map((p) => (
-              <tr key={p._id} className="text-center hover:bg-gray-50">
+              <tr key={p._id} className="text-center hover:bg-gray-50 transition-all duration-300">
                 <td className="py-2 px-4 border">
                   {p.user?.name || 'N/A'}
                   <br />
@@ -161,8 +161,8 @@ const AdminPayoutsTab = () => {
                 <td className="py-2 px-4 border space-x-2">
                   {p.status === 'pending' ? (
                     <>
-                      <button onClick={() => setConfirm({ show: true, action: 'approve', payload: p._id })} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">Approve</button>
-                      <button onClick={() => setConfirm({ show: true, action: 'reject', payload: p._id })} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Reject</button>
+                      <button onClick={() => setConfirm({ show: true, action: 'approve', payload: p._id })} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded transition">Approve</button>
+                      <button onClick={() => setConfirm({ show: true, action: 'reject', payload: p._id })} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition">Reject</button>
                     </>
                   ) : (
                     <span className="text-gray-400 italic">No action</span>
@@ -175,8 +175,8 @@ const AdminPayoutsTab = () => {
       </div>
 
       {confirm.show && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded shadow-md text-center">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 transition-all duration-300">
+          <div className="bg-white p-6 rounded shadow-md text-center transform transition-transform scale-100 animate-fade-slide-in">
             <p className="mb-4 font-medium">
               {confirm.action === 'export'
                 ? 'Export all filtered payouts to Excel?'
@@ -187,13 +187,13 @@ const AdminPayoutsTab = () => {
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleConfirmedAction}
-                className="bg-green-600 text-white px-4 py-2 rounded"
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
               >
                 Yes
               </button>
               <button
                 onClick={() => setConfirm({ show: false, action: '', payload: null })}
-                className="bg-gray-300 px-4 py-2 rounded"
+                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition"
               >
                 Cancel
               </button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../utils/axios'; 
+import axios from '../utils/axios';
 
 const AdminPayoutsTab = () => {
   const [users, setUsers] = useState([]);
@@ -23,10 +23,7 @@ const AdminPayoutsTab = () => {
         rewardIndex,
         newStatus,
       });
-      setEditing((prev) => ({
-        ...prev,
-        [`${userId}-${rewardIndex}`]: false,
-      }));
+      setEditing((prev) => ({ ...prev, [`${userId}-${rewardIndex}`]: false }));
       fetchRewards();
     } catch (err) {
       console.error('Error updating reward:', err);
@@ -82,20 +79,20 @@ const AdminPayoutsTab = () => {
   const filteredRewards = getFilteredData();
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
+    <div className="p-4 bg-white shadow rounded-lg animate-fade-slide-in">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Payout Requests</h2>
 
-      <div className="flex gap-4 mb-6">
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <input
           type="text"
           placeholder="Search by User ID"
-          className="border border-gray-300 px-4 py-2 rounded w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border px-4 py-2 rounded w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={userFilter}
           onChange={(e) => setUserFilter(e.target.value)}
         />
-
         <select
-          className="border border-gray-300 px-4 py-2 rounded w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border px-4 py-2 rounded w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={taskFilter}
           onChange={(e) => setTaskFilter(e.target.value)}
         >
@@ -108,8 +105,9 @@ const AdminPayoutsTab = () => {
         </select>
       </div>
 
+      {/* Rewards Table */}
       <div className="overflow-auto max-h-[500px] border rounded">
-        <table className="min-w-full border border-gray-300">
+        <table className="min-w-full border border-gray-300 text-sm">
           <thead>
             <tr className="bg-gray-100 text-center text-gray-700">
               <th className="py-3 px-4 border">User ID</th>
@@ -122,7 +120,6 @@ const AdminPayoutsTab = () => {
           <tbody>
             {filteredRewards.map((r, i) => {
               const key = `${r.userId}-${r.rewardIndex}`;
-              const isEditing = editing[key];
               const isReferralBonus = r.originalTitle.toLowerCase().includes('referral');
               const isPending = r.status === 'pending';
 
@@ -151,29 +148,10 @@ const AdminPayoutsTab = () => {
                             Reject
                           </button>
                         </>
-                      ) : isEditing ? (
-                        <>
-                          <button
-                           onClick={() => handleStatusChange(r.userId, r.rewardIndex, 'completed')}
-
-                            className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded transition"
-                          >
-                            Approve
-                          </button>
-                          <button
-                            onClick={() => handleStatusChange(r.userId, r.rewardIndex, 'failed')}
-                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
-                          >
-                            Reject
-                          </button>
-                        </>
                       ) : (
                         <button
                           onClick={() =>
-                            setEditing(prev => ({
-                              ...prev,
-                              [key]: true,
-                            }))
+                            setEditing(prev => ({ ...prev, [key]: true }))
                           }
                           className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition"
                         >
