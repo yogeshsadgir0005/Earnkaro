@@ -14,7 +14,7 @@ dotenv.config();
 connectDB();
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://earnkaro-flax.vercel.app',
   credentials: true,}));
 
 
