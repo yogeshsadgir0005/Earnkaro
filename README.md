@@ -2,7 +2,7 @@
 
 EarnKaro is a **full-stack rewards platform** where users can earn money by completing tasks such as app installs, quizzes, and more. The platform supports **real-time tracking** of user actions, secure authentication, and a powerful admin dashboard for managing payouts and rewards.  
 
-# [🌐 Live Preview : ](https://portfolio-seven-sepia-16.vercel.app/)
+# [🌐 Live Preview : https://earnkaro-flax.vercel.app/ ](https://earnkaro-flax.vercel.app/ )
 
 ---
 
